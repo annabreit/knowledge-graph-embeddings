@@ -126,6 +126,8 @@ hyper parameters
 ## Dependencies
 * numpy
 * scipy
+* dill
+* scipy.sparse
 
 
 ## References
