@@ -13,7 +13,7 @@ from utils.dataset import TripletDataset, Vocab
 
 np.random.seed(46)
 DEFAULT_LOG_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                               '{}'.format(datetime.now().strftime('%Y%m%d_%H:%M')))
+                               '{}'.format(datetime.now().strftime('%Y%m%d_%H%M')))
 
 
 def train(args):
