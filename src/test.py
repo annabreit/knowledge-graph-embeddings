@@ -45,7 +45,11 @@ def test(args):
         print('{:20s}: {}'.format(metric, all_res[metric]))
 
 
-if __name__ == '__main__':
+def main(args_list=None):
+    """ main function, if no args list is provided, args will be parsed from command line
+        args:
+           args_list (list): list of arguments e.g. ['--ent', 'path/to/entity/list.txt"]
+       """
     p = argparse.ArgumentParser('Link prediction models')
 
     # dataset
@@ -56,8 +60,17 @@ if __name__ == '__main__':
     p.add_argument('--graphall', type=str, help='all graph file for filtered evaluation')
 
     # model
-    p.add_argument('--method', default=None, type=str, help='method ["complex", "distmult", "transe", "hole", "rescal", "analogy"]')
+    p.add_argument('--method', default=None, type=str,
+                   help='method ["complex", "distmult", "transe", "hole", "rescal", "analogy"]')
     p.add_argument('--model', type=str, help='trained model path')
 
-    args = p.parse_args()
+    if args_list:
+        args = p.parse_args(args_list)
+    else:
+        args = p.parse_args()
+
     test(args)
+
+
+if __name__ == '__main__':
+    main()

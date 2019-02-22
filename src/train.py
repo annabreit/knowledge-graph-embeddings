@@ -131,7 +131,13 @@ def train(args):
     logger.info('done all')
 
 
-if __name__ == '__main__':
+
+def main(args_list=None):
+    """ main function, if no args list is provided, args will be parsed from command line
+        args:
+           args_list (list): list of arguments e.g. ['--ent', 'path/to/entity/list.txt"]
+    """
+
     p = argparse.ArgumentParser('Link prediction models')
     p.add_argument('--mode', default='single', type=str, help='training mode ["pairwise", "single"]')
 
@@ -142,7 +148,8 @@ if __name__ == '__main__':
     p.add_argument('--valid', type=str, help='validation data')
 
     # model
-    p.add_argument('--method', default='complex', type=str, help='method ["complex", "distmult", "transe", "hole", "rescal", "analogy"]')
+    p.add_argument('--method', default='complex', type=str,
+                   help='method ["complex", "distmult", "transe", "hole", "rescal", "analogy"]')
     p.add_argument('--epoch', default=300, type=int, help='number of epochs')
     p.add_argument('--batch', default=128, type=int, help='batch size')
     p.add_argument('--lr', default=0.05, type=float, help='learning rate')
@@ -166,6 +173,13 @@ if __name__ == '__main__':
     # others
     p.add_argument('--log', default=DEFAULT_LOG_DIR, type=str, help='output log dir')
 
-    args = p.parse_args()
+    if args_list:
+        args = p.parse_args(args_list)
+    else:
+        args = p.parse_args()
 
-    train(args)
+    train (args)
+
+
+if __name__ == '__main__':
+    main()
